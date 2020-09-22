@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: killerapp-deployment
+  labels:
+    app: killerapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: killerapp
+  template:
+    metadata:
+      labels:
+        app: killerapp
+    spec:
+      containers:
+      - name: killerappghcr
+        image: ghcr.io/renevanosnabrugge/killerapp:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: pullsecret
